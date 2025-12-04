@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ethers } from "ethers"
 import { useToast } from "@/components/ui/use-toast"
-import { Layers, ArrowUpFromLine, Loader2, AlertCircle } from "lucide-react"
+import { Layers, ArrowUpFromLine, Loader2, AlertCircle, Wallet } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export function StakeUnstake() {
-  const { dETHContract, sETHContract, isConnected, dETHBalance, sETHBalance, refreshBalances, account } = useWeb3()
+  const { dETHContract, sETHContract, isConnected, dETHBalance, sETHBalance, ethBalance, refreshBalances, account } = useWeb3()
   const [stakeAmount, setStakeAmount] = useState("")
   const [unstakeAmount, setUnstakeAmount] = useState("")
   const [isStaking, setIsStaking] = useState(false)
@@ -238,6 +238,36 @@ export function StakeUnstake() {
   return (
     <div>
       <h1 className="page-title">Stake & Unstake</h1>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Available Ethereum Balance</h3>
+            <Wallet className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{ethBalance !== "" ? Number.parseFloat(ethBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">ETH</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Deposited Ethereum</h3>
+            <Layers className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{dETHBalance !== "" ? Number.parseFloat(dETHBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">dETH</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Staked Ethereum</h3>
+            <Layers className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{sETHBalance !== "" ? Number.parseFloat(sETHBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">sETH</div>
+        </div>
+      </div>
 
       <Tabs defaultValue="stake" onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">

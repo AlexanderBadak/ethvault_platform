@@ -88,31 +88,29 @@ export function StakingDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="stat-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-lightblue-700">Available Balance</h3>
+            <h3 className="text-sm font-medium text-lightblue-700">Available Ethereum Balance</h3>
             <Wallet className="h-5 w-5 text-lightblue-500" />
           </div>
-          <div className="text-2xl font-bold text-lightblue-950">{Number.parseFloat(dETHBalance).toFixed(4)}</div>
+          <div className="text-2xl font-bold text-lightblue-950">{ethBalance !== "" ? Number.parseFloat(ethBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">ETH</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Deposited Ethereum</h3>
+            <Layers className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{dETHBalance !== "" ? Number.parseFloat(dETHBalance).toFixed(4) : ""}</div>
           <div className="text-sm font-medium text-lightblue-600">dETH</div>
         </div>
 
         <div className="stat-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-lightblue-700">Staked Balance</h3>
+            <h3 className="text-sm font-medium text-lightblue-700">Staked Ethereum</h3>
             <Layers className="h-5 w-5 text-lightblue-500" />
           </div>
-          <div className="text-2xl font-bold text-lightblue-950">{Number.parseFloat(sETHBalance).toFixed(4)}</div>
+          <div className="text-2xl font-bold text-lightblue-950">{sETHBalance !== "" ? Number.parseFloat(sETHBalance).toFixed(4) : ""}</div>
           <div className="text-sm font-medium text-lightblue-600">sETH</div>
-        </div>
-
-        <div className="stat-card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-lightblue-700">Total Protocol Staked</h3>
-            <BarChart3 className="h-5 w-5 text-lightblue-500" />
-          </div>
-          <div className="text-2xl font-bold text-lightblue-950">
-            {Number.parseFloat(overview.totalETHStaked).toFixed(2)}
-          </div>
-          <div className="text-sm font-medium text-lightblue-600">ETH</div>
         </div>
       </div>
 

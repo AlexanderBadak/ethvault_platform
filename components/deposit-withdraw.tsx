@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ethers } from "ethers"
 import { useToast } from "@/components/ui/use-toast"
-import { PlusCircle, MinusCircle, Loader2 } from "lucide-react"
+import { PlusCircle, MinusCircle, Loader2, Wallet, Layers } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export function DepositWithdraw() {
-  const { dETHContract, isConnected, ethBalance, dETHBalance, refreshBalances } = useWeb3()
+  const { dETHContract, isConnected, ethBalance, dETHBalance, sETHBalance, refreshBalances } = useWeb3()
   const [depositAmount, setDepositAmount] = useState("")
   const [withdrawAmount, setWithdrawAmount] = useState("")
   const [isDepositing, setIsDepositing] = useState(false)
@@ -141,6 +141,36 @@ export function DepositWithdraw() {
   return (
     <div>
       <h1 className="page-title">Deposit & Withdraw</h1>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Available Ethereum Balance</h3>
+            <Wallet className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{ethBalance !== "" ? Number.parseFloat(ethBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">ETH</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Deposited Ethereum</h3>
+            <Layers className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{dETHBalance !== "" ? Number.parseFloat(dETHBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">dETH</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-lightblue-700">Staked Ethereum</h3>
+            <Layers className="h-5 w-5 text-lightblue-500" />
+          </div>
+          <div className="text-2xl font-bold text-lightblue-950">{sETHBalance !== "" ? Number.parseFloat(sETHBalance).toFixed(4) : ""}</div>
+          <div className="text-sm font-medium text-lightblue-600">sETH</div>
+        </div>
+      </div>
 
       <Tabs defaultValue="deposit" onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
